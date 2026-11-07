@@ -1,0 +1,317 @@
+.button {
+  --size: clamp(52px, 7vw, 62px);
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: 1px solid rgba(255, 236, 180, 0.7);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #fff3c2 0%, #f5cc62 38%, #d8992f 72%, #a8681a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 8px rgba(110, 55, 0, 0.35),
+    0 0 22px rgba(255, 180, 60, 0.45),
+    0 8px 22px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+
+/* Expanding rings that invite a tap */
+.pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 214, 120, 0.75);
+  pointer-events: none;
+  animation: pulse 2.6s ease-out infinite;
+}
+
+.pulseLate {
+  animation-delay: 1.3s;
+}
+
+.icon {
+  display: block;
+  width: calc(var(--size) * 0.56);
+  height: calc(var(--size) * 0.56);
+  fill: #3a1f04;
+  overflow: visible;
+}
+
+.band {
+  fill: #c0791a;
+}
+
+.sparks {
+  fill: none;
+  stroke: #7a3e05;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  animation: sparkle 0.9s ease-in-out infinite alternate;
+}
+
+.idle {
+  display: block;
+  animation: hover 2.4s ease-in-out infinite;
+}
+
+/* Icon shoots up and drops back in on each click */
+.launching {
+  display: block;
+  animation: launch 0.7s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      inset 0 -3px 8px rgba(110, 55, 0, 0.3),
+      0 0 34px rgba(255, 190, 70, 0.7),
+      0 12px 28px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.button:active {
+  transform: scale(0.93);
+  transition-duration: 0.12s;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--gold-50);
+  outline-offset: 6px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.75);
+    opacity: 0;
+  }
+}
+
+@keyframes hover {
+  0%,
+  100% {
+    transform: translateY(1px);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes launch {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  35% {
+    transform: translateY(-140%);
+    opacity: 0;
+  }
+  36% {
+    transform: translateY(70%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes sparkle {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   "Tap here" hint — shown until the visitor's first tap.
+   Loop (2.4s): hand moves in → presses the button (40%) →
+   button squishes + ripple ring → hand moves away.
+   ========================================================= */
+
+.wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.hintLabel {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 26px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(0.68rem, 2.6vw, 0.82rem);
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--gold-100);
+  text-shadow: 0 0 12px rgba(246, 207, 106, 0.6), 0 1px 4px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  transform: translateX(-50%);
+  animation: hintFloat 1.8s ease-in-out infinite;
+  transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+
+/* Dark pill keeps the label readable over the lit city windows */
+.hintLabel > span {
+  padding: 6px 14px 6px calc(14px + 0.18em);
+  margin-left: -0.18em;
+  border-radius: 999px;
+  background: rgba(4, 6, 16, 0.72);
+  border: 1px solid rgba(246, 207, 106, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.arrow {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--gold-300);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(246, 207, 106, 0.8));
+  animation: arrowBounce 1.1s ease-in-out infinite;
+}
+
+.hand {
+  position: absolute;
+  left: calc(50% - 6px);
+  top: calc(50% + 6px);
+  width: 34px;
+  height: 34px;
+  fill: #fff6e2;
+  stroke: #3a1f04;
+  stroke-width: 1.1;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: 44% 12%;
+  animation: handTap 2.4s ease-in-out 1.4s infinite;
+}
+
+/* Ripple ring from the "press" */
+.tapRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--gold-50);
+  opacity: 0;
+  pointer-events: none;
+  animation: tapRing 2.4s ease-out 1.4s infinite;
+}
+
+/* Button squishes exactly when the hand presses it */
+.hinting .button {
+  animation: tapPress 2.4s ease-in-out 1.4s infinite;
+}
+
+/* After the first tap: hide the hint parts */
+.hintDone .hintLabel {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.hintDone .hand,
+.hintDone .tapRing {
+  animation: none;
+  opacity: 0;
+}
+
+@keyframes hintFloat {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+@keyframes arrowBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(5px);
+    opacity: 1;
+  }
+}
+
+@keyframes handTap {
+  0% {
+    opacity: 0;
+    transform: translate(16px, 18px) rotate(-18deg) scale(1);
+  }
+  18% {
+    opacity: 1;
+    transform: translate(4px, 5px) rotate(-18deg) scale(1);
+  }
+  32% {
+    transform: translate(0, 0) rotate(-18deg) scale(1);
+  }
+  40% {
+    transform: translate(0, 0) rotate(-18deg) scale(0.86);
+  }
+  52% {
+    transform: translate(3px, 4px) rotate(-18deg) scale(1);
+  }
+  72% {
+    opacity: 1;
+    transform: translate(6px, 8px) rotate(-18deg) scale(1);
+  }
+  88%,
+  100% {
+    opacity: 0;
+    transform: translate(14px, 16px) rotate(-18deg) scale(1);
+  }
+}
+
+@keyframes tapPress {
+  0%,
+  34%,
+  54%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes tapRing {
+  0%,
+  38% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  41% {
+    opacity: 0.95;
+    transform: scale(0.85);
+  }
+  75%,
+  100% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}

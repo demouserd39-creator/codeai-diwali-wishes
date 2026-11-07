@@ -1,0 +1,65 @@
+:root {
+  /* Night sky */
+  --night-0: #03050c;
+  --night-1: #070c1f;
+  --night-2: #101a3e;
+
+  /* Gold scale */
+  --gold-50: #fff8e1;
+  --gold-100: #fdeab0;
+  --gold-300: #f6cf6a;
+  --gold-500: #e3a93b;
+  --gold-700: #b07720;
+  --gold-900: #6b430f;
+
+  /* Text */
+  --ivory: #f7ecd6;
+  --ivory-dim: rgba(247, 236, 214, 0.74);
+
+  --ease-out: cubic-bezier(0.2, 0.75, 0.2, 1);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--night-0);
+  color: var(--ivory);
+}
+
+body {
+  font-family: var(--font-body), Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+button {
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

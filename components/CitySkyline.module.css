@@ -1,0 +1,81 @@
+.skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(200px, 38vh, 360px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.skyline svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* A few windows flicker on and off, like real apartments */
+.flicker {
+  fill: #ffd27a;
+  animation: flicker 7s steps(1, end) infinite;
+}
+
+/* Red aircraft warning lights on antennas */
+.beacon {
+  fill: #ff4d4d;
+  filter: drop-shadow(0 0 3px rgba(255, 70, 70, 0.9));
+  animation: beacon 2.2s ease-in-out infinite;
+}
+
+/* Diwali string lights: three groups twinkle out of step */
+.bulb {
+  animation: bulb 1.8s ease-in-out infinite;
+}
+
+.bulb1 {
+  animation-delay: -0.6s;
+}
+
+.bulb2 {
+  animation-delay: -1.2s;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  40% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 0.85;
+  }
+  57% {
+    opacity: 0.2;
+  }
+  60% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes beacon {
+  0%,
+  60%,
+  100% {
+    opacity: 0.15;
+  }
+  20% {
+    opacity: 1;
+  }
+}
+
+@keyframes bulb {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}

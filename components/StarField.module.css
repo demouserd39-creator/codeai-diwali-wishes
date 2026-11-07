@@ -1,0 +1,129 @@
+/* The whole field drifts very slowly, like the night sky turning */
+.field {
+  position: absolute;
+  inset: -20px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  animation: skyDrift 80s ease-in-out infinite alternate;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: var(--min);
+  will-change: transform, opacity;
+  animation: twinkle var(--dur) ease-in-out var(--delay) infinite;
+}
+
+.medium {
+  box-shadow: 0 0 5px 1px color-mix(in srgb, var(--c) 60%, transparent);
+}
+
+/* Bright stars: halo + a cross-shaped glint that pulses and slowly turns */
+.bright {
+  box-shadow:
+    0 0 7px 2px color-mix(in srgb, var(--c) 75%, transparent),
+    0 0 16px 5px rgba(190, 210, 255, 0.2);
+  animation-name: brightTwinkle;
+}
+
+.bright::before,
+.bright::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  margin: -0.5px 0 0 -10px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--c), rgba(255, 255, 255, 0));
+}
+
+.bright::after {
+  transform: rotate(90deg);
+}
+
+/* Shooting stars (position/timing set per element) */
+.shooting {
+  position: absolute;
+  width: 150px;
+  height: 1.6px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(220, 232, 255, 0.55) 60%, #ffffff);
+  box-shadow: 0 0 6px rgba(220, 232, 255, 0.6);
+  transform-origin: left center;
+  opacity: 0;
+  animation-name: shoot;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes skyDrift {
+  from {
+    transform: translate3d(-14px, 4px, 0);
+  }
+  to {
+    transform: translate3d(14px, -6px, 0);
+  }
+}
+
+/* Clearly visible twinkle: dim & small → bright & slightly larger → dim */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--min);
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+}
+
+@keyframes brightTwinkle {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4) rotate(45deg);
+  }
+  100% {
+    opacity: 0.45;
+    transform: scale(0.8) rotate(90deg);
+  }
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: rotate(152deg) translateX(0);
+  }
+  1.5% {
+    opacity: 1;
+  }
+  9% {
+    opacity: 0;
+    transform: rotate(152deg) translateX(380px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(152deg) translateX(380px);
+  }
+}
+
+/* Fewer stars on small screens */
+@media (max-width: 640px) {
+  .star:nth-child(n + 51) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shooting {
+    display: none;
+  }
+}
