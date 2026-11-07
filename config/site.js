@@ -17,6 +17,8 @@ export const siteConfig = {
   startLabel: "Start Celebration",
   startingLabel: "Lighting the Sky…",
   startingMessage: "Get ready… the sky is about to light up!",
-  metaTitle: `Happy Diwali | ${brandName}`,
-  metaDescription: `A festival of lights and happiness. Step into a special Diwali celebration from ${brandName}.`,
+  // Browser tab + WhatsApp / Instagram link preview. Kept brand-free on purpose:
+  // the company name only appears inside the site's greeting animation.
+  metaTitle: "Happy Diwali ✨ A Surprise For You",
+  metaDescription: "Tap the rocket, light up the sky and celebrate the festival of lights! 🎆",
 };

@@ -27,6 +27,17 @@ const body = Cormorant_Garamond({
 export const metadata = {
   title: siteConfig.metaTitle,
   description: siteConfig.metaDescription,
+  // Explicit share-preview tags so WhatsApp / Instagram / others show exactly this text
+  openGraph: {
+    title: siteConfig.metaTitle,
+    description: siteConfig.metaDescription,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: siteConfig.metaTitle,
+    description: siteConfig.metaDescription,
+  },
 };
 
 export const viewport = {
